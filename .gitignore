@@ -1,0 +1,6 @@
+*.backup
+/**/.terraform/
+/**/.DS_Store
+/**/k8s-jd-team-*
+
+

@@ -1,0 +1,9 @@
+  kind: ClusterRole
+  apiVersion: rbac.authorization.k8s.io/v1
+  metadata:
+    namespace: team-e-space
+    name: deployment-manager
+  rules:
+  - apiGroups: ["", "extensions", "apps"] # "" indicates the core API group
+    resources: ["*"]
+    verbs: ["*"]
