@@ -1,7 +1,11 @@
-output "rancher_master_dns" {
-  value = "${aws_instance.rancher-master.public_dns}"
+output "master_dns" {
+  value = ["${aws_instance.k8s-master.*.public_dns}"]
 }
 
-output "private_ip" {
-  value = "${aws_instance.rancher-master.private_ip}"
+output "private_ips" {
+  value = ["${aws_instance.k8s-master.*.private_ip}"]
+}
+
+output "public_ips" {
+  value = ["${aws_instance.k8s-master.*.public_ip}"]
 }

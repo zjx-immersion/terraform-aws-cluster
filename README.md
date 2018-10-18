@@ -16,7 +16,7 @@ export AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxx
 
 ### 3.TF_VAR_access_key and TF_VAR_secret_key are required which are generate in AWS
 
->../terraform plan -var k8stoken="326e2d.cb4fc5d7a7d672f3" -var node-ssh-key="$(cat ../secrets/k8skey.pub)" -var-file initialize.tfvars
+>../terraform plan -var node-ssh-key="$(cat ../secrets/sshkey.pub)" -var-file initialize.tfvars
 
 ### 4.Run terraform apply fist time to create Rancher Master and related AWS env
 

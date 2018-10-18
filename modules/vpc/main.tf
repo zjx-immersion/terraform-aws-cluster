@@ -15,7 +15,7 @@ resource "aws_internet_gateway" "gw" {
     vpc_id = "${aws_vpc.main.id}"
 
     tags {
-        Name = "TF_main"
+        Name = "${var.vpc_name}"
     }
 }
 
@@ -29,7 +29,7 @@ resource "aws_route_table" "r" {
     depends_on = ["aws_internet_gateway.gw"]
 
     tags {
-        Name = "TF_main"
+        Name = "${var.vpc_name}"
     }
 }
 
@@ -38,10 +38,10 @@ resource "aws_route_table_association" "publicA" {
     route_table_id = "${aws_route_table.r.id}"
 }
 
-resource "aws_route_table_association" "publicB" {
-    subnet_id = "${aws_subnet.publicB.id}"
-    route_table_id = "${aws_route_table.r.id}"
-}
+# resource "aws_route_table_association" "publicB" {
+#     subnet_id = "${aws_subnet.publicB.id}"
+#     route_table_id = "${aws_route_table.r.id}"
+# }
 
 resource "aws_route_table_association" "publicC" {
     subnet_id = "${aws_subnet.publicC.id}"
@@ -55,20 +55,20 @@ resource "aws_subnet" "publicA" {
     map_public_ip_on_launch = true
 
     tags {
-        Name = "TF_PubSubnetA"
+        Name = "${var.vpc_name}-PubSubnetA"
     }
 }
 
-resource "aws_subnet" "publicB" {
-    vpc_id = "${aws_vpc.main.id}"
-    cidr_block = "10.0.101.0/24"
-    availability_zone = "${var.region}c"
-    map_public_ip_on_launch = true
+# resource "aws_subnet" "publicB" {
+#     vpc_id = "${aws_vpc.main.id}"
+#     cidr_block = "10.0.101.0/24"
+#     availability_zone = "${var.region}c"
+#     map_public_ip_on_launch = true
 
-    tags {
-        Name = "TF_PubSubnetB"
-    }
-}
+#     tags {
+#         Name = "${var.vpc_name}-PubSubnetB"
+#     }
+# }
 
 resource "aws_subnet" "publicC" {
     vpc_id = "${aws_vpc.main.id}"
@@ -77,7 +77,7 @@ resource "aws_subnet" "publicC" {
     map_public_ip_on_launch = true
 
     tags {
-        Name = "TF_PubSubnetC"
+        Name = "${var.vpc_name}-PubSubnetC"
     }
 }
 

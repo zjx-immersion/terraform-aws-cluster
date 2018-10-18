@@ -28,21 +28,17 @@ variable "node-ssh-key" {}
 # variable "k8stoken" {}
 
 variable "region" {
-  default = "ap-northeast-1"
-}
-
-variable "ami" {
-  default = "ami-d39a02b5"
+  default = "cn-north-1"
 }
 
 variable "ami_type" {
   type = "map"
 
   default = {
-    eu-west-1    = "ami-481e232e"
-    eu-west-2    = "ami-51776335"
-    eu-central-1 = "ami-a71ecfc8"
-    cn-north-1 = "ami-a87dafc5"
+    eu-west-1      = "ami-481e232e"
+    eu-west-2      = "ami-51776335"
+    eu-central-1   = "ami-a71ecfc8"
+    cn-north-1     = "ami-4f508c22"
     ap-northeast-1 = "ami-d39a02b5"
   }
 }
@@ -70,4 +66,3 @@ variable "hst_des" {
 variable "slave_env_name" {
   default = "default"
 }
-

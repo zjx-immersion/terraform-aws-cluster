@@ -9,7 +9,10 @@ variable "ami" {}
 
 variable "env_name" {}
 
-variable "k8stoken" {}
+# variable "k8stoken" {}
+variable "instance_count" {
+  default = 1
+}
 
 variable "master-userdata" {
     default = "master.sh"

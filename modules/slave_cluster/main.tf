@@ -6,7 +6,7 @@ data "template_file" "userdata_hst" {
 
    vars {
     master_ip  = "${var.master_ip}"
-    rancher_env_name = "${var.rancher_env_name}"
+    # rancher_env_name = "${var.node_env_name}"
     k8stoken  = "${var.k8stoken}"
    }
 }
@@ -14,7 +14,7 @@ data "template_file" "userdata_hst" {
 
 # Hosts launch configuration
 
-resource "aws_launch_configuration" "rancher_hst" {
+resource "aws_launch_configuration" "k8s-node" {
   image_id                    = "${var.ami}"
   instance_type               = "${var.hst_size}"
   key_name                    = "${var.ssh_key_name}"
@@ -25,16 +25,16 @@ resource "aws_launch_configuration" "rancher_hst" {
     create_before_destroy = true
   }
 
-  user_data = "${data.template_file.userdata_hst.rendered}"
+  # user_data = "${data.template_file.userdata_hst.rendered}"
 
 }
 
 # Hosts autoscaling group
 
-resource "aws_autoscaling_group" "rancher_hst" {
-  name                      = "${var.env_name}-rancher-slaves-${var.group_name}"
+resource "aws_autoscaling_group" "k8s-nodes" {
+  name                      = "${var.env_name}-nodes-${var.group_name}"
 #   availability_zones        = ["${var.region}a", "${var.region}b"]
-  launch_configuration      = "${aws_launch_configuration.rancher_hst.name}"
+  launch_configuration      = "${aws_launch_configuration.k8s-master.name}"
   health_check_grace_period = 500
   health_check_type         = "EC2"
   max_size                  = "${var.hst_max}"

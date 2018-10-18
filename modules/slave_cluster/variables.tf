@@ -21,7 +21,7 @@ variable "ssh_key_name" {}
 
 variable "ami" {}
 
-variable "rancher_env_name" {}
+variable "node_env_name" {}
 
 variable "group_name" {
     default = ""
