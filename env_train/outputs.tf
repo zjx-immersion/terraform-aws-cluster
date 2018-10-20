@@ -27,6 +27,10 @@ output "submnet_id" {
   value = "${module.vpc-tf.aws_subnet_publicA_id}"
 }
 
+output "bastion_dns" {
+  value = "${module.bastion.bastion_master_dns}"
+}
+
 output "k8s_master_dns" {
   value = "${module.k8s-masters.master_dns}"
 }

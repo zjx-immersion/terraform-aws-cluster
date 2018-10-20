@@ -2,5 +2,5 @@
 /**/.terraform/
 /**/.DS_Store
 /**/k8s-jd-team-*
-
+terraform.tfstate.d
 

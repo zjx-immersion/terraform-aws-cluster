@@ -38,15 +38,15 @@ resource "aws_route_table_association" "publicA" {
     route_table_id = "${aws_route_table.r.id}"
 }
 
-# resource "aws_route_table_association" "publicB" {
-#     subnet_id = "${aws_subnet.publicB.id}"
-#     route_table_id = "${aws_route_table.r.id}"
-# }
-
-resource "aws_route_table_association" "publicC" {
-    subnet_id = "${aws_subnet.publicC.id}"
+resource "aws_route_table_association" "publicB" {
+    subnet_id = "${aws_subnet.publicB.id}"
     route_table_id = "${aws_route_table.r.id}"
 }
+
+# resource "aws_route_table_association" "publicC" {
+#     subnet_id = "${aws_subnet.publicC.id}"
+#     route_table_id = "${aws_route_table.r.id}"
+# }
 
 resource "aws_subnet" "publicA" {
     vpc_id = "${aws_vpc.main.id}"
@@ -59,32 +59,39 @@ resource "aws_subnet" "publicA" {
     }
 }
 
-# resource "aws_subnet" "publicB" {
+resource "aws_subnet" "publicB" {
+    vpc_id = "${aws_vpc.main.id}"
+    cidr_block = "10.0.101.0/24"
+    availability_zone = "${var.region}b"
+    map_public_ip_on_launch = true
+
+    tags {
+        Name = "${var.vpc_name}-PubSubnetB"
+    }
+}
+
+# resource "aws_subnet" "publicC" {
 #     vpc_id = "${aws_vpc.main.id}"
-#     cidr_block = "10.0.101.0/24"
+#     cidr_block = "10.0.102.0/24"
 #     availability_zone = "${var.region}c"
 #     map_public_ip_on_launch = true
 
 #     tags {
-#         Name = "${var.vpc_name}-PubSubnetB"
+#         Name = "${var.vpc_name}-PubSubnetC"
 #     }
 # }
-
-resource "aws_subnet" "publicC" {
-    vpc_id = "${aws_vpc.main.id}"
-    cidr_block = "10.0.102.0/24"
-    availability_zone = "${var.region}c"
-    map_public_ip_on_launch = true
-
-    tags {
-        Name = "${var.vpc_name}-PubSubnetC"
-    }
-}
 
 resource "aws_security_group" "rancher-tf" {
   name = "rancher-tf"
   description = "Allow inbound ssh traffic"
   vpc_id = "${aws_vpc.main.id}"
+
+  ingress {
+    from_port = 8
+    to_port = 0
+    protocol = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   ingress {
     from_port   = 500

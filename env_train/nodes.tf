@@ -8,4 +8,5 @@ module "k8s-nodes" {
 
   # k8stoken = "${var.k8stoken}"
   instance_count = 2
+  ssh_private_key_path  = "../secrets/sshkey"
 }

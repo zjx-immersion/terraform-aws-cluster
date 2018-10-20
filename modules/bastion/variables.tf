@@ -13,8 +13,8 @@ variable "env_name" {}
 variable "instance_count" {
   default = 1
 }
-
 variable "ssh_private_key_path" {}
+
 variable "init-userdata" {
     default = "init.sh"
 }

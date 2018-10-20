@@ -18,6 +18,7 @@ resource "aws_instance" "k8s-master" {
   vpc_security_group_ids = ["${var.security_group_id}"]
 
   #depends_on = ["var.aws_internet_gateway_gw"]
+
   connection {
       type = "ssh"
       # host = "${self.private_ip}"
@@ -25,12 +26,6 @@ resource "aws_instance" "k8s-master" {
       user = "ubuntu"
       agent = false
       private_key = "${file("../secrets/sshkey")}"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-        "sudo cp /home/ubuntu/.ssh/authorized_keys /root/.ssh/"
-    ]
   }
 
   tags {
