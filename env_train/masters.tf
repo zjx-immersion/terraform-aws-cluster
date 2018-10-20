@@ -7,6 +7,6 @@ module "k8s-masters" {
   env_name              = "${var.env_name}-k8s-master"
 
   # k8stoken = "${var.k8stoken}"
-  instance_count = 3
+  instance_count = 1
   ssh_private_key_path  = "../secrets/sshkey"
 }

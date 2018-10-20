@@ -1,4 +1,4 @@
-#Remote State Initial
+#Remote State Initial - Disable
 
 >AWS_ACCESS_KEY_ID=xxxxxxxxxxxx
 AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxx
