@@ -10,7 +10,7 @@ data "template_file" "init-userdata" {
 resource "aws_instance" "k8s-master" {
   ami           = "${var.ami}"
   count = "${var.instance_count}"
-  instance_type = "t2.medium"
+  instance_type = "t2.small"
   subnet_id = "${var.aws_subnet_publicA_id}"
   user_data = "${data.template_file.init-userdata.rendered}"
   key_name = "${var.ssh_key_name}"

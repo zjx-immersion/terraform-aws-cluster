@@ -20,13 +20,13 @@ export AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxx
 
 ### 4.Run terraform apply fist time to create Rancher Master and related AWS env
 
->../terraform apply -var k8stoken="326e2d.cb4fc5d7a7d672f3" -var node-ssh-key="$(cat ../secrets/k8skey.pub)" -var-file initialize.tfvars
+>../terraform apply -var node-ssh-key="$(cat ../secrets/k8skey.pub)" -var-file initialize.tfvars
 
 ### 5.Destroy the AWS of k8s cluster resources when you won't use it a period of time
->../terraform destroy -var k8stoken="326e2d.cb4fc5d7a7d672f3" -var node-ssh-key="$(cat ../secrets/k8skey.pub)" -var-file initialize.tfvars
+>../terraform destroy -var node-ssh-key="$(cat ../secrets/k8skey.pub)" -var-file initialize.tfvars
 
 ### 6.SSH to the master node of k8s cluster
->ssh ubuntu@$(../terraform output rancher_master_dns) -i ../secrets/k8skey
+>ssh ubuntu@$(../terraform output bastion_dns) -i ../secrets/k8skey
 
 ### 7.Get the kubectl config in master server
 >mkdir -p $HOME/.kube
@@ -37,7 +37,7 @@ export AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxx
 
 ### 8.Copy the config from master server to you local machine
 
->scp -i ../secrets/k8skey ubuntu@$(../terraform output rancher_master_dns):/home/ubuntu/.kube/config ./admin.conf
+>scp -i ../secrets/k8skey ubuntu@$(../terraform output bastion_dns):/home/ubuntu/.kube/config ./admin.conf
 
 ### 9.Test kubectl does work in you local or not
 
